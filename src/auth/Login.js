@@ -5,9 +5,14 @@ import React, { useState, useEffect } from 'react'
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [text, setText] = useState('');
+  // const [text, setText] = useState('');
   const [isLogin, setisLogin] = useState(false) 
   const [store, setStore] = useState(null) 
+  const [productName, setProductName] = useState('');
+  const [productCost, setProductCost] = useState('');
+  const [productQty, setProductQty] = useState('');
+  const [locationId, setLocationId] = useState('');
+  const [familyId, setfamilyId] = useState('');
 
 
   const storeCollector = () => {
@@ -53,21 +58,43 @@ const Login = () => {
 
   const post = () => {
     const data = {
-      text,
+      productName,
+      productCost,
+      productQty,
+      locationId,
+      familyId
     };
+
     const token = localStorage.getItem('login')
     console.log(token);
-    fetch("http://localhost:8000/products", {
+
+    // fetch("http://localhost:8000/products", {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': `Bearer ${token.token}`
+    //   },
+    //   body: data,
+    //   mode: 'no-cors'
+    // }).then((response) => {
+    //   response.json().then((result) => {
+    //     console.log("result:", result);
+    //   })
+    // })
+
+    fetch('http://localhost:8000/products', {
       method: 'GET',
-      headers: {
+      headers:{
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token.token}`
-      },
-    }).then((response) => {
-      response.json().then((result) => {
-        console.log("result:", result);
+      }
+      }).then(data => {
+        return data.json();
       })
-    })
+      .then(result => {
+        console.log(result);
+      })
+    
   }
 
 
@@ -97,14 +124,52 @@ const Login = () => {
            </form> 
            :     
            <div>
-               <h1>Dashboard</h1>
-               <textarea 
-                 cols="30" 
-                 rows="10"
-                 onChange = {
-                   e => setText(e.target.value)
-                 }
-               value = {text} />
+               <h1>Product Dashboard</h1>
+               <input
+                type = "text"
+                placeholder = 'Name'
+                onChange = {
+                    e => setProductName(e.target.value)
+                  }
+                value = {productName}
+                />
+
+               <input
+                type = "number"
+                placeholder = 'Cost'
+                onChange = {
+                    e => setProductCost(e.target.value)
+                  }
+                value = {productCost}
+                />
+
+               <input
+                type = "number"
+                placeholder = 'Quantity'
+                onChange = {
+                    e => setProductQty(e.target.value)
+                  }
+                value = {productQty}
+                />
+
+               <input
+                type = "number"
+                placeholder = 'Location id'
+                onChange = {
+                    e => setLocationId(e.target.value)
+                  }
+                value = {locationId}
+                />
+
+               <input
+                type = "number"
+                placeholder = 'Family id'
+                onChange = {
+                    e => setfamilyId(e.target.value)
+                  }
+                value = {familyId}
+                />
+
                <button onClick={() => post()}>Post</button>
            </div>
           }

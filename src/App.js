@@ -19,10 +19,10 @@ function App() {
       <CartProvider>
         <Nav />
         <Routes>
-          <Route path='/' element={<Shopping />} />
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/' element={<Register />} /> 
+          <Route path='shopping' element={<Shopping />} />
+          <Route path='dashboard' element={<Dashboard />} />
           <Route path='cart' element={<Cart />} />
-          <Route path='register' element={<Register />} /> 
           <Route path='login' element={<Login />} /> 
         </Routes>
       </CartProvider>
