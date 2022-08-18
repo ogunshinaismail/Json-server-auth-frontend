@@ -57,16 +57,17 @@ const Login = () => {
   }
 
   const post = () => {
-    const data = {
-      productName,
-      productCost,
-      productQty,
-      locationId,
-      familyId
-    };
+    // const data = {
+    //   productName,
+    //   productCost,
+    //   productQty,
+    //   locationId,
+    //   familyId
+    // };
 
-    const token = localStorage.getItem('login')
+    const token = JSON.parse( localStorage.getItem('login') );
     console.log(token);
+    // console.log(token);
 
     // fetch("http://localhost:8000/products", {
     //   method: 'POST',
