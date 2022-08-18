@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
+import { Routes, Route } from "react-router-dom"
+// import ContextRender from "./ContextRender";
+import Shopping from './Shopping'
+import Cart from './components/Cart';
+import Nav from './components/Nav';
+import { CartProvider } from './CartContext';
+import Register from './auth/Register';
+import axios from 'axios'
+import Login from './auth/Login';
+import Dashboard from './components/Dashboard';
+
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CartProvider>
+        <Nav />
+        <Routes>
+          <Route path='/' element={<Shopping />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='cart' element={<Cart />} />
+          <Route path='register' element={<Register />} /> 
+          <Route path='login' element={<Login />} /> 
+        </Routes>
+      </CartProvider>
     </div>
   );
 }
